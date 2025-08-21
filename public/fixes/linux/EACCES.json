@@ -1,0 +1,17 @@
+{
+  "id": "EACCES",
+  "title": "Fix for Permission Denied (EACCES)",
+  "description": "The process attempted to access a file or resource without proper permissions.",
+  "steps": [
+    "Check the file or directory permissions with `ls -l`.",
+    "Update permissions using `chmod` or `chown`.",
+    "Verify that the user has the correct group membership."
+  ],
+  "image": "/images/errors/EACCES.png",
+  "resources": [
+    {
+      "label": "GNU C Library Errors",
+      "url": "https://www.gnu.org/software/libc/manual/html_node/Error-Codes.html"
+    }
+  ]
+}
