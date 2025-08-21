@@ -1,0 +1,9 @@
+[
+  {
+    "id": "0xC0000005",
+    "code": "STATUS_ACCESS_VIOLATION",
+    "message": "The instruction at 0x%p referenced memory at 0x%p. The memory could not be %s.",
+    "category": "Windows > NTStatus",
+    "tags": ["access violation", "ntstatus"]
+  }
+]
