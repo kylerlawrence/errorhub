@@ -1,0 +1,18 @@
+{
+  "id": "0x0000007B",
+  "title": "Fix for INACCESSIBLE_BOOT_DEVICE",
+  "description": "This error occurs when Windows cannot access the system partition during startup.",
+  "steps": [
+    "Restart the computer and enter BIOS/UEFI.",
+    "Check that the correct drive is set as the boot device.",
+    "Run CHKDSK /F from recovery tools.",
+    "If using new hardware, ensure SATA/RAID drivers are installed."
+  ],
+  "image": "/images/errors/0x0000007B.png",
+  "resources": [
+    {
+      "label": "Microsoft Docs",
+      "url": "https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x7b--inaccessible-boot-device"
+    }
+  ]
+}
