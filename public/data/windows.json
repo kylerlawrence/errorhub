@@ -1,0 +1,8 @@
+[
+  {
+    "code": "0x80070005",
+    "message": "Access Denied",
+    "description": "Occurs when permissions are missing or insufficient.",
+    "category": "System Errors"
+  }
+]
