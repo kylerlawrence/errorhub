@@ -1,0 +1,16 @@
+[
+  {
+    "id": "EACCES",
+    "code": "13",
+    "message": "Permission denied.",
+    "category": "Linux > System Errors",
+    "tags": ["permissions", "linux"]
+  },
+  {
+    "id": "ENOMEM",
+    "code": "12",
+    "message": "Out of memory.",
+    "category": "Linux > System Errors",
+    "tags": ["memory", "linux"]
+  }
+]
