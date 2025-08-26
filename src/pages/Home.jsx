@@ -18,7 +18,7 @@ export default function Home() {
 
         const results = await Promise.all(
           sources.map(src =>
-            fetch(process.env.PUBLIC_URL + src).then(res =>
+            fetch(import.meta.env.BASE_URL + src).then(res =>
               res.ok ? res.json() : []
             )
           )
