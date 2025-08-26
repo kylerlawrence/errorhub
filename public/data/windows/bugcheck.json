@@ -1,16 +1,9 @@
 [
   {
     "id": "0x0000007B",
-    "code": "INACCESSIBLE_BOOT_DEVICE",
-    "message": "The system has encountered an inaccessible boot device.",
-    "category": "Windows > Bug Check",
-    "tags": ["boot", "windows", "critical"]
-  },
-  {
-    "id": "0x00000050",
-    "code": "PAGE_FAULT_IN_NONPAGED_AREA",
-    "message": "Invalid system memory was referenced.",
-    "category": "Windows > Bug Check",
-    "tags": ["memory", "windows"]
+    "code": "0x0000007B",
+    "message": "INACCESSIBLE_BOOT_DEVICE",
+    "description": "Windows failed to access the system boot device.",
+    "tags": ["Windows", "Bug Check Codes"]
   }
 ]
