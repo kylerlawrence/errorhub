@@ -1,0 +1,9 @@
+[
+  {
+    "id": "EACCES",
+    "code": "EACCES",
+    "message": "Permission denied",
+    "description": "The process attempted to access a file without proper permissions.",
+    "tags": ["Linux", "System Errors"]
+  }
+]
