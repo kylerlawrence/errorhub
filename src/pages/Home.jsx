@@ -1,48 +1,72 @@
 import React, { useEffect, useState } from "react";
-import SearchBar from "../components/SearchBar";
-import FilterPanel from "../components/FilterPanel";
-import ErrorCard from "../components/ErrorCard";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [query, setQuery] = useState("");
-  const [filters, setFilters] = useState({});
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // Load JSON files (example: Windows BugCheck + NTStatus, Linux errors, etc.)
   useEffect(() => {
     async function loadData() {
-      const windows = await fetch("/data/windows.json").then((r) => r.json());
-      const linux = await fetch("/data/linux.json").then((r) => r.json());
-      setErrors([...windows, ...linux]);
+      try {
+        // Load multiple categories
+        const sources = [
+          "/data/windows/bugcheck.json",
+          "/data/windows/ntstatus.json",
+          "/data/linux/errors.json",
+        ];
+
+        const results = await Promise.all(
+          sources.map(src =>
+            fetch(process.env.PUBLIC_URL + src).then(res =>
+              res.ok ? res.json() : []
+            )
+          )
+        );
+
+        // Flatten and merge all categories
+        const merged = results.flat();
+        setErrors(merged);
+      } catch (err) {
+        console.error("Error loading JSON data", err);
+        setErrors([]);
+      } finally {
+        setLoading(false);
+      }
     }
+
     loadData();
   }, []);
 
-  const filtered = errors.filter((err) => {
-    const q = query.toLowerCase();
-    const matchQuery =
-      err.code.toLowerCase().includes(q) ||
-      err.message.toLowerCase().includes(q);
+  if (loading) {
+    return <p className="text-gray-600">Loading errors...</p>;
+  }
 
-    const matchFilters = Object.entries(filters).every(([cat, subs]) =>
-      subs.length === 0 ? true : subs.includes(err.category)
-    );
-
-    return matchQuery && matchFilters;
-  });
+  if (errors.length === 0) {
+    return <p className="text-red-500">No error data found.</p>;
+  }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div>
-        <FilterPanel filters={filters} setFilters={setFilters} clearFilters={() => setFilters({})} />
-      </div>
-      <div className="md:col-span-3">
-        <SearchBar query={query} setQuery={setQuery} />
-        <div className="mt-4">
-          {filtered.map((err) => (
-            <ErrorCard key={err.code} error={err} />
-          ))}
-        </div>
-      </div>
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Error Codes</h1>
+      <ul className="space-y-2">
+        {errors.map((err, i) => (
+          <li
+            key={i}
+            className="p-4 rounded bg-white dark:bg-gray-800 shadow hover:shadow-md transition"
+          >
+            <Link to={`/error/${encodeURIComponent(err.code)}`}>
+              <p className="font-mono text-blue-600 dark:text-blue-400">
+                {err.code}
+              </p>
+              <p className="font-semibold">{err.message}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {err.description}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
