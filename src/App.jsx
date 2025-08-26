@@ -13,7 +13,7 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
         <header className="flex justify-between p-4 shadow-md bg-white dark:bg-gray-800">
           <Link to="/" className="text-xl font-bold">ErrorHub</Link>
